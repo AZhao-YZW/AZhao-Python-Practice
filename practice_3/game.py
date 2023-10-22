@@ -45,6 +45,7 @@ def game_restart():
 
 
 def game_exit():
+    print('byyyyye')
     screen.bye()
 
 def game_loop():

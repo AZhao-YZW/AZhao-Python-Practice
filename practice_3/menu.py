@@ -73,5 +73,6 @@ class Menu:
     def game_start(self):
         self.btn_start.ondestroy()
         self.btn_exit.ondestroy()
+        self.motion_event.unbind(self.mouse_move_listener)
         self.s.clearscreen()
         self._game_start()

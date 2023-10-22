@@ -1,5 +1,5 @@
 from turtle import Turtle
-from event import MotionEvent
+from event import MotionEvent, ButtonPressEvent
 from game_window import GameWindow
 from util import *
 
@@ -12,6 +12,7 @@ class Button:
     t = Turtle()
     w = GameWindow()
     motion_event = MotionEvent()
+    btn_press_event = ButtonPressEvent()
     mouse: Turtle
     move_in = False
     move_out = True
@@ -28,6 +29,7 @@ class Button:
     def ondestroy(self):
         self.motion_event.unbind(self._movein_listener)
         self.motion_event.unbind(self._onclick_listener)
+        self.btn_press_event.unbind(self._onclick_listener)
 
     def __init__(self,
                  mouse,
@@ -46,6 +48,7 @@ class Button:
         self._draw()
         self.motion_event.bind(self._movein_listener)
         self.motion_event.bind(self._onclick_listener)
+        self.btn_press_event.bind(self._onclick_listener)
 
     def _turtle_init(self):
         self.t.hideturtle()
@@ -94,9 +97,6 @@ class Button:
         return False
     
     def _movein_listener(self, event):
-        if int(event.type) != MOTION_EVENT:
-            return
-
         if self._is_move_in(event.x, event.y):
             self._draw('#dddddd')
 
