@@ -1,3 +1,4 @@
+from collections.abc import Callable
 from turtle import Turtle
 from event import MotionEvent, ButtonPressEvent
 from game_window import GameWindow
@@ -7,47 +8,42 @@ MOUSE_LEFT_DOWN = 8
 MOTION_EVENT = 6
 BUTTON_PRESS_EVENT = 4
 
+
 class Button:
 
-    t = Turtle()
     w = GameWindow()
     motion_event = MotionEvent()
     btn_press_event = ButtonPressEvent()
-    mouse: Turtle
-    move_in = False
-    move_out = True
-    mouse_down = False
-    text: str
-    pos: dict[str, int]
-    size: dict[str, int]
-    font: tuple[str, int, str]
-    _callback = None
+    t = Turtle()
 
-    def onclick(self, callback):
+    def onclick(self, callback: Callable[[None], None]):
         self._callback = callback
 
     def ondestroy(self):
         self.motion_event.unbind(self._movein_listener)
-        self.motion_event.unbind(self._onclick_listener)
         self.btn_press_event.unbind(self._onclick_listener)
 
     def __init__(self,
-                 mouse,
                  text='Button',
                  x=0, y=0, w=100, h=50,
-                 font=('Arial', 8, 'normal')):
-        self.mouse = mouse
+                 font: tuple[str, int, str] = ('Arial', 8, 'normal')):
         self.text = text
         self.pos = {'x': x, 'y': y}
         self.size = {'w': w, 'h': h}
         self.font = font
+        self._instance_var_init()
         self._init()
+
+    def _instance_var_init(self):
+        self.move_in = False
+        self.move_out = True
+        self.mouse_down = False
+        self._callback = None
 
     def _init(self):
         self._turtle_init()
         self._draw()
         self.motion_event.bind(self._movein_listener)
-        self.motion_event.bind(self._onclick_listener)
         self.btn_press_event.bind(self._onclick_listener)
 
     def _turtle_init(self):
@@ -57,13 +53,16 @@ class Button:
 
     def _draw(self, color=None):
         if color:
-            self.t.setpos(self.pos['x'] - self.size['w'] / 2, self.pos['y'] + self.size['h'])
+            self.t.setpos(self.pos['x'] - self.size['w'] /
+                          2, self.pos['y'] + self.size['h'])
             self.t.fillcolor(color)
             self.t.begin_fill()
             self.t.setpos(self.pos['x'] - self.size['w'] / 2, self.pos['y'])
             self.t.setpos(self.pos['x'] + self.size['w'] / 2, self.pos['y'])
-            self.t.setpos(self.pos['x'] + self.size['w'] / 2, self.pos['y'] + self.size['h'])
-            self.t.setpos(self.pos['x'] - self.size['w'] / 2, self.pos['y'] + self.size['h'])
+            self.t.setpos(self.pos['x'] + self.size['w'] /
+                          2, self.pos['y'] + self.size['h'])
+            self.t.setpos(self.pos['x'] - self.size['w'] /
+                          2, self.pos['y'] + self.size['h'])
             self.t.end_fill()
         self.t.setpos(self.pos['x'], self.pos['y'])
         self.t.write(self.text, False, 'center', self.font)
@@ -73,7 +72,7 @@ class Button:
         if (pos['x'] > self.pos['x'] - self.size['w'] / 2 and
             pos['x'] < self.pos['x'] + self.size['w'] / 2 and
             pos['y'] < self.pos['y'] + self.size['h'] and
-            pos['y'] > self.pos['y']):
+                pos['y'] > self.pos['y']):
             return True
         else:
             return False
@@ -86,7 +85,7 @@ class Button:
         else:
             self.move_in = False
         return False
-        
+
     def _is_move_out(self, x, y):
         if self._is_in_btn(x, y):
             self.move_out = False
@@ -95,7 +94,7 @@ class Button:
                 self.move_out = True
                 return True
         return False
-    
+
     def _movein_listener(self, event):
         if self._is_move_in(event.x, event.y):
             self._draw('#dddddd')
@@ -110,8 +109,5 @@ class Button:
             return False
 
     def _onclick_listener(self, event):
-        if int(event.type) != BUTTON_PRESS_EVENT:
-            return
-        
         if self._is_in_btn(event.x, event.y) and self._is_click(event.state):
             self._callback()

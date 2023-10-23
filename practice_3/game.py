@@ -14,6 +14,11 @@ python实现贪吃蛇，绘图使用turtle库
 4. turtle是基于tkinter实现的，但是turtle只提供基础的操作，实现一些高级的功能还需使用tkinter
 5. turtle仅提供画布操作API，其他常用的图形界面组件要自己实现，包括这些组件的事件机制，为了方便，
    每种组件使用一个画笔
+6. Python重要知识点：* 最详细的知识来自官网 *
+    关于list：python类中的属性是否共享？ https://www.codenong.com/45284838/
+    python:如何避免在实例之间共享类数据? https://www.codenong.com/1680528/
+    python怎么做类型标注 https://blog.csdn.net/KWSY2008/article/details/120411751
+    Python官网类型标注介绍 https://docs.python.org/3/library/typing.html
 '''
 
 from turtle import Turtle
@@ -30,11 +35,11 @@ refresh_time = round(1000 / FPS)
 screen = Screen()   # Screen为单例
 
 
-
 def game_init():
     screen.tracer(5, 0)
     menu = Menu(game_start, game_exit)
     snake = Snake()
+
 
 def game_start():
     print('staaart')
@@ -47,6 +52,7 @@ def game_restart():
 def game_exit():
     print('byyyyye')
     screen.bye()
+
 
 def game_loop():
     screen.mainloop()
