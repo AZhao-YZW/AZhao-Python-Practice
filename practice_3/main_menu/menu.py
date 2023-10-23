@@ -8,7 +8,10 @@ from button import Button
 
 
 class Menu:
-
+    '''
+    game_start: 开始游戏回调函数;
+    game_exit: 退出游戏回调函数
+    '''
     s = Screen()
     motion_event = MotionEvent()
     w = GameWindow()

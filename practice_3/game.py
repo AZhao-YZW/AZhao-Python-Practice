@@ -19,14 +19,13 @@ python实现贪吃蛇，绘图使用turtle库
     python:如何避免在实例之间共享类数据? https://www.codenong.com/1680528/
     python怎么做类型标注 https://blog.csdn.net/KWSY2008/article/details/120411751
     Python官网类型标注介绍 https://docs.python.org/3/library/typing.html
+    Python导入系统 https://docs.python.org/zh-cn/3/reference/import.html
 '''
 
 from turtle import Turtle
 from turtle import Screen
-from menu import Menu
-from snake import Wall
-from snake import Food
-from snake import Snake
+from main_menu.menu import Menu
+from game_map.game_map import GameMap
 
 # 游戏帧率(Hz)
 FPS = 30
@@ -38,15 +37,15 @@ screen = Screen()   # Screen为单例
 def game_init():
     screen.tracer(5, 0)
     menu = Menu(game_start, game_exit)
-    snake = Snake()
 
 
 def game_start():
     print('staaart')
 
 
+
 def game_restart():
-    pass
+    print('restart')
 
 
 def game_exit():
