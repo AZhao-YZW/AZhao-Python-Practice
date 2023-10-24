@@ -1,10 +1,10 @@
 from collections.abc import Callable
 from turtle import Turtle
 from turtle import Screen
-from event import MotionEvent
-from util import *
-from game_window import GameWindow
-from button import Button
+from frame import MotionEvent
+from frame import GameWindow
+from frame import Utils
+from component import Button
 
 
 class Menu:
@@ -57,7 +57,7 @@ class Menu:
         self.mouse.showturtle()
 
     def _mouse_move_listener(self, event):
-        pos = axis_screen_to_turtle(event.x, event.y,
+        pos = Utils.axis_screen_to_turtle(event.x, event.y,
                                     self.w.canvwidth, self.w.canvheight)
         self.mouse.setpos(pos['x'], pos['y'])
 

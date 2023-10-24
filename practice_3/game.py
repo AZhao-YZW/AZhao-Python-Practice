@@ -20,12 +20,15 @@ python实现贪吃蛇，绘图使用turtle库
     python怎么做类型标注 https://blog.csdn.net/KWSY2008/article/details/120411751
     Python官网类型标注介绍 https://docs.python.org/3/library/typing.html
     Python导入系统 https://docs.python.org/zh-cn/3/reference/import.html
+    使用Python的package机制如何简化utils包设计详解 https://blog.csdn.net/weixin_39967598/article/details/110076708
+7. Python值得学习的项目：
+    Manim: 3Brown1Blue制作数学动画所使用的库, github链接: https://github.com/3b1b/manim
 '''
 
 from turtle import Turtle
 from turtle import Screen
-from main_menu.menu import Menu
-from game_map.game_map import GameMap
+from main_menu import Menu
+from game_map import GameMap
 
 # 游戏帧率(Hz)
 FPS = 30

@@ -1,8 +1,8 @@
 from collections.abc import Callable
 from turtle import Turtle
-from event import MotionEvent, ButtonPressEvent
-from game_window import GameWindow
-from util import *
+from frame import MotionEvent, ButtonPressEvent
+from frame import GameWindow
+from frame import Utils
 
 MOUSE_LEFT_DOWN = 8
 MOTION_EVENT = 6
@@ -68,7 +68,7 @@ class Button:
         self.t.write(self.text, False, 'center', self.font)
 
     def _is_in_btn(self, x, y):
-        pos = axis_screen_to_turtle(x, y, self.w.canvwidth, self.w.canvheight)
+        pos = Utils.axis_screen_to_turtle(x, y, self.w.canvwidth, self.w.canvheight)
         if (pos['x'] > self.pos['x'] - self.size['w'] / 2 and
             pos['x'] < self.pos['x'] + self.size['w'] / 2 and
             pos['y'] < self.pos['y'] + self.size['h'] and
