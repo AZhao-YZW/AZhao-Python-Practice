@@ -1,4 +1,5 @@
-#! "D:\Python\Python312\python.exe"
+#! /usr/bin/env python3
+# -*-coding:utf-8 -*-
 
 '''
 python实现贪吃蛇，绘图使用turtle库
@@ -23,6 +24,7 @@ python实现贪吃蛇，绘图使用turtle库
     使用Python的package机制如何简化utils包设计详解 https://blog.csdn.net/weixin_39967598/article/details/110076708
 7. Python值得学习的项目：
     Manim: 3Brown1Blue制作数学动画所使用的库, github链接: https://github.com/3b1b/manim
+8. Python文件头SheBang是为了可移植性，意为Unix/Linux指定解释器路径、Python编码方式。
 '''
 
 from turtle import Turtle
