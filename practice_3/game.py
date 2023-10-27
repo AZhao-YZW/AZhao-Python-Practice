@@ -22,15 +22,18 @@ python实现贪吃蛇，绘图使用turtle库
     Python官网类型标注介绍 https://docs.python.org/3/library/typing.html
     Python导入系统 https://docs.python.org/zh-cn/3/reference/import.html
     使用Python的package机制如何简化utils包设计详解 https://blog.csdn.net/weixin_39967598/article/details/110076708
+    【Python】Python全部异常类型（Error）总结 https://blog.csdn.net/g944468183/article/details/124450119
+    Python同名包和模块如何处理 https://blog.csdn.net/UZDW_/article/details/131745636
 7. Python值得学习的项目：
     Manim: 3Brown1Blue制作数学动画所使用的库, github链接: https://github.com/3b1b/manim
 8. Python文件头SheBang是为了可移植性，意为Unix/Linux指定解释器路径、Python编码方式。
+    参考文章：https://blog.csdn.net/daningliu/article/details/121617391
 '''
 
 from turtle import Turtle
 from turtle import Screen
 from main_menu import Menu
-from game_map import GameMap
+# from game_map import Map1
 
 # 游戏帧率(Hz)
 FPS = 30
@@ -46,7 +49,7 @@ def game_init():
 
 def game_start():
     print('staaart')
-
+    # map1 = Map1()
 
 
 def game_restart():

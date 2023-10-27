@@ -1,1 +1,1 @@
-from .game_map import GameMap
+from .map1 import Map1

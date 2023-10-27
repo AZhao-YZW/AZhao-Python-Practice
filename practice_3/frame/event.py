@@ -23,16 +23,16 @@ class Event:
 
 class _MotionEvent(Event):
 
-    _motion_event = None
+    _event = None
 
     def __init__(self):
         super().__init__()
         self.s.getcanvas().bind('<Motion>', self._trigger_listener)
 
 
-class _ButtonPressEvent(Event):
+class _MouseLPressEvent(Event):
 
-    _btn_press_event = None
+    _event = None
 
     def __init__(self):
         super().__init__()
@@ -43,12 +43,12 @@ class _ButtonPressEvent(Event):
 
 
 def MotionEvent():
-    if _MotionEvent._motion_event is None:
-        _MotionEvent._motion_event = _MotionEvent()
-    return _MotionEvent._motion_event
+    if _MotionEvent._event is None:
+        _MotionEvent._event = _MotionEvent()
+    return _MotionEvent._event
 
 
-def ButtonPressEvent():
-    if _ButtonPressEvent._btn_press_event is None:
-        _ButtonPressEvent._btn_press_event = _ButtonPressEvent()
-    return _ButtonPressEvent._btn_press_event
+def MouseLPressEvent():
+    if _MouseLPressEvent._event is None:
+        _MouseLPressEvent._event = _MouseLPressEvent()
+    return _MouseLPressEvent._event

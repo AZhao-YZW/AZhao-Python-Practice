@@ -21,19 +21,15 @@ class Menu:
     def __init__(self, game_start, game_exit):
         self._game_start = game_start
         self._game_exit = game_exit
+        Utils.turtle_init(self.mouse)
+        Utils.turtle_init(self.t)
         self._menu_init()
 
     def _menu_init(self):
-        self._turtle_init()
         self.t.setpos(0, 200)
         self.t.write('贪吃蛇', False, 'center', ('Arial', 52, 'normal'))
         self._button_init()
         self._mouse_init()
-
-    def _turtle_init(self):
-        self.t.hideturtle()
-        self.t.penup()
-        self.t.speed(0)
 
     def _button_init(self):
         self.btn_start = Button('开始游戏',
@@ -46,10 +42,7 @@ class Menu:
         self.btn_exit.onclick(self._menu_exit)
 
     def _mouse_init(self):
-        self.mouse.hideturtle()
-        self.mouse.penup()
         self.mouse.color('red')
-        self.mouse.speed(0)
         self.mouse.shape('turtle')
         self.mouse.shapesize(1.5)
         self.mouse.left(120)
@@ -57,9 +50,9 @@ class Menu:
         self.mouse.showturtle()
 
     def _mouse_move_listener(self, event):
-        pos = Utils.axis_screen_to_turtle(event.x, event.y,
-                                    self.w.canvwidth, self.w.canvheight)
-        self.mouse.setpos(pos['x'], pos['y'])
+        x, y = Utils.axis_adapter(event.x, event.y,
+                                 self.w.canvwidth, self.w.canvheight)
+        self.mouse.setpos(x, y)
 
     def _menu_exit(self):
         self.btn_start.ondestroy()

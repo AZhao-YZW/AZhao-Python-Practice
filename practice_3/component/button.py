@@ -1,36 +1,35 @@
 from collections.abc import Callable
 from turtle import Turtle
-from frame import MotionEvent, ButtonPressEvent
+from frame import MotionEvent, MouseLPressEvent
 from frame import GameWindow
 from frame import Utils
-
-MOUSE_LEFT_DOWN = 8
-MOTION_EVENT = 6
-BUTTON_PRESS_EVENT = 4
 
 
 class Button:
 
-    w = GameWindow()
-    motion_event = MotionEvent()
-    btn_press_event = ButtonPressEvent()
+    window = GameWindow()
+    _motion_event = MotionEvent()
+    _mouse_left_press_event = MouseLPressEvent()
     t = Turtle()
 
     def onclick(self, callback: Callable[[None], None]):
         self._callback = callback
 
     def ondestroy(self):
-        self.motion_event.unbind(self._movein_listener)
-        self.btn_press_event.unbind(self._onclick_listener)
+        self._motion_event.unbind(self._movein_listener)
+        self._mouse_left_press_event.unbind(self._onclick_listener)
 
     def __init__(self,
                  text='Button',
                  x=0, y=0, w=100, h=50,
                  font: tuple[str, int, str] = ('Arial', 8, 'normal')):
         self.text = text
-        self.pos = {'x': x, 'y': y}
-        self.size = {'w': w, 'h': h}
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
         self.font = font
+        Utils.turtle_init(self.t)
         self._instance_var_init()
         self._init()
 
@@ -41,38 +40,29 @@ class Button:
         self._callback = None
 
     def _init(self):
-        self._turtle_init()
         self._draw()
-        self.motion_event.bind(self._movein_listener)
-        self.btn_press_event.bind(self._onclick_listener)
-
-    def _turtle_init(self):
-        self.t.hideturtle()
-        self.t.penup()
-        self.t.speed(0)
+        self._motion_event.bind(self._movein_listener)
+        self._mouse_left_press_event.bind(self._onclick_listener)
 
     def _draw(self, color=None):
         if color:
-            self.t.setpos(self.pos['x'] - self.size['w'] /
-                          2, self.pos['y'] + self.size['h'])
+            self.t.setpos(self.x - self.w / 2, self.y + self.h)
             self.t.fillcolor(color)
             self.t.begin_fill()
-            self.t.setpos(self.pos['x'] - self.size['w'] / 2, self.pos['y'])
-            self.t.setpos(self.pos['x'] + self.size['w'] / 2, self.pos['y'])
-            self.t.setpos(self.pos['x'] + self.size['w'] /
-                          2, self.pos['y'] + self.size['h'])
-            self.t.setpos(self.pos['x'] - self.size['w'] /
-                          2, self.pos['y'] + self.size['h'])
+            self.t.setpos(self.x - self.w / 2, self.y)
+            self.t.setpos(self.x + self.w / 2, self.y)
+            self.t.setpos(self.x + self.w / 2, self.y + self.h)
+            self.t.setpos(self.x - self.w / 2, self.y + self.h)
             self.t.end_fill()
-        self.t.setpos(self.pos['x'], self.pos['y'])
+        self.t.setpos(self.x, self.y)
         self.t.write(self.text, False, 'center', self.font)
 
-    def _is_in_btn(self, x, y):
-        pos = Utils.axis_screen_to_turtle(x, y, self.w.canvwidth, self.w.canvheight)
-        if (pos['x'] > self.pos['x'] - self.size['w'] / 2 and
-            pos['x'] < self.pos['x'] + self.size['w'] / 2 and
-            pos['y'] < self.pos['y'] + self.size['h'] and
-                pos['y'] > self.pos['y']):
+    def _is_in_btn(self, sx, sy):
+        canvwidth = self.window.canvwidth
+        canvheight = self.window.canvheight
+        x, y = Utils.axis_adapter(sx, sy, canvwidth, canvheight)
+        if (x > self.x - self.w / 2 and x < self.x + self.w / 2 and
+                y < self.y + self.h and y > self.y):
             return True
         else:
             return False
@@ -102,12 +92,6 @@ class Button:
         if self._is_move_out(event.x, event.y):
             self._draw('#ffffff')
 
-    def _is_click(self, state):
-        if state == MOUSE_LEFT_DOWN:
-            return True
-        else:
-            return False
-
     def _onclick_listener(self, event):
-        if self._is_in_btn(event.x, event.y) and self._is_click(event.state):
+        if self._is_in_btn(event.x, event.y):
             self._callback()

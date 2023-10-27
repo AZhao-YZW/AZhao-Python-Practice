@@ -53,6 +53,17 @@
 
 
 
-import turtle as t
+# import turtle as t
 
-t.write()
+# t.write()
+
+
+
+# a = 'b'
+# if a in ('a', 'b'):
+#     print('Hello')
+
+
+print('Exeption Test')
+raise ValueError('ERROR')
+print('can you print this?')
