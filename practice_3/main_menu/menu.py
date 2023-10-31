@@ -4,7 +4,7 @@ from turtle import Screen
 from frame import MotionEvent
 from frame import GameWindow
 from frame import Utils
-from component import Button
+from component import Button, Text
 
 
 class Menu:
@@ -26,18 +26,19 @@ class Menu:
         self._menu_init()
 
     def _menu_init(self):
-        self.t.setpos(0, 200)
-        self.t.write('贪吃蛇', False, 'center', ('Arial', 52, 'normal'))
+        self.text_title = Text('贪吃蛇',
+                               0, 200, 'center',
+                               ('Arial', 52, 'normal'))
         self._button_init()
         self._mouse_init()
 
     def _button_init(self):
         self.btn_start = Button('开始游戏',
-                                0, 0, 200, 50,
+                                0, 0, 200, 50, 'center',
                                 ('Arial', 24, 'normal'))
         self.btn_start.onclick(self._menu_start)
         self.btn_exit = Button('退出游戏',
-                               0, -100, 200, 50,
+                               0, -100, 200, 50, 'center',
                                ('Arial', 24, 'normal'))
         self.btn_exit.onclick(self._menu_exit)
 
@@ -51,19 +52,19 @@ class Menu:
 
     def _mouse_move_listener(self, event):
         x, y = Utils.axis_adapter(event.x, event.y,
-                                 self.w.canvwidth, self.w.canvheight)
+                                  self.w.canvwidth, self.w.canvheight)
         self.mouse.setpos(x, y)
 
-    def _menu_exit(self):
+    def _menu_destroy(self):
         self.btn_start.ondestroy()
         self.btn_exit.ondestroy()
         self.motion_event.unbind(self._mouse_move_listener)
         self.s.clearscreen()
+
+    def _menu_exit(self):
+        self._menu_destroy()
         self._game_exit()
 
     def _menu_start(self):
-        self.btn_start.ondestroy()
-        self.btn_exit.ondestroy()
-        self.motion_event.unbind(self._mouse_move_listener)
-        self.s.clearscreen()
+        self._menu_destroy()
         self._game_start()
