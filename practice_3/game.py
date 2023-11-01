@@ -29,12 +29,13 @@ python实现贪吃蛇，绘图使用turtle库
     Manim: 3Brown1Blue制作数学动画所使用的库, github链接: https://github.com/3b1b/manim
 8. Python文件头SheBang是为了可移植性，意为Unix/Linux指定解释器路径、Python编码方式。
     参考文章：https://blog.csdn.net/daningliu/article/details/121617391
+9. 清屏仅使用game_window模块提供的clear_window()方法，turtle自带的clearscreen()会对Tkinter全局的状态有影响
 '''
 
 from turtle import Turtle
 from turtle import Screen
 from main_menu import Menu
-# from game_map import Map1
+from game_map import Map1
 
 # 游戏帧率(Hz)
 FPS = 30
@@ -45,12 +46,15 @@ screen = Screen()   # Screen为单例
 
 def game_init():
     screen.tracer(5, 0)
-    menu = Menu(game_start, game_exit)
+    Menu(game_start, game_exit)
 
+def return_menu():
+    print('return_menu')
+    Menu(game_start, game_exit)
 
 def game_start():
     print('staaart')
-    # map1 = Map1()
+    Map1(return_menu)
 
 
 def game_restart():

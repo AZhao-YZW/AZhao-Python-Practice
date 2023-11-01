@@ -5,7 +5,7 @@ class Shape:
     '''基本形状使用Shape类来画'''
 
     def rect(t: Turtle, x, y, w, h, anchor='top-left',
-             border=True, bordercolor='#000000',
+             border=True, bordercolor='#000000', borderwidth=1,
              fill=False, fillcolor='#ffffff'):
         if anchor in ('top-left', 'tl'):
             tl = (x, y)
@@ -29,6 +29,7 @@ class Shape:
         if border:
             t.pendown()
             t.color(bordercolor)
+            t.pensize(borderwidth)
         if fill:
             t.fillcolor(fillcolor)
             t.begin_fill()

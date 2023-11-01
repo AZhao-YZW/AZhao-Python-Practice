@@ -4,24 +4,24 @@ from turtle import Screen
 from frame import MotionEvent
 from frame import GameWindow
 from frame import Utils
-from component import Button, Text
+from component import Button, Text, Mouse
 
 
-class Menu:
+class _Menu:
     '''
     game_start: 开始游戏回调函数;
     game_exit: 退出游戏回调函数
     '''
+    _menu = None
     s = Screen()
     motion_event = MotionEvent()
     w = GameWindow()
-    mouse = Turtle()
+    mouse = Mouse()
     t = Turtle()
 
     def __init__(self, game_start, game_exit):
         self._game_start = game_start
         self._game_exit = game_exit
-        Utils.turtle_init(self.mouse)
         Utils.turtle_init(self.t)
         self._menu_init()
 
@@ -29,10 +29,6 @@ class Menu:
         self.text_title = Text('贪吃蛇',
                                0, 200, 'center',
                                ('Arial', 52, 'normal'))
-        self._button_init()
-        self._mouse_init()
-
-    def _button_init(self):
         self.btn_start = Button('开始游戏',
                                 0, 0, 200, 50, 'center',
                                 ('Arial', 24, 'normal'))
@@ -42,29 +38,23 @@ class Menu:
                                ('Arial', 24, 'normal'))
         self.btn_exit.onclick(self._menu_exit)
 
-    def _mouse_init(self):
-        self.mouse.color('red')
-        self.mouse.shape('turtle')
-        self.mouse.shapesize(1.5)
-        self.mouse.left(120)
-        self.motion_event.bind(self._mouse_move_listener)
-        self.mouse.showturtle()
-
-    def _mouse_move_listener(self, event):
-        x, y = Utils.axis_adapter(event.x, event.y,
-                                  self.w.canvwidth, self.w.canvheight)
-        self.mouse.setpos(x, y)
-
     def _menu_destroy(self):
         self.btn_start.ondestroy()
         self.btn_exit.ondestroy()
-        self.motion_event.unbind(self._mouse_move_listener)
-        self.s.clearscreen()
+        self.w.clear_window()
 
     def _menu_exit(self):
         self._menu_destroy()
         self._game_exit()
+        self._menu = None
 
     def _menu_start(self):
         self._menu_destroy()
         self._game_start()
+        self._menu = None
+
+
+def Menu(game_start, game_exit):
+    if _Menu._menu is None:
+        _Menu._menu = _Menu(game_start, game_exit)
+    return _Menu._menu

@@ -1,9 +1,8 @@
 from turtle import Turtle
-
+from frame import Utils
+from base import Shape
 
 class Wall:
-
-    t = Turtle()
 
     def enable(self):
         self.enable = True
@@ -11,24 +10,25 @@ class Wall:
     def disable(self):
         self.enable = False
 
-    def __init__(self, w=500, h=500, enable=True):
+    def __init__(self, w=700, h=700, enable=True):
         self.w = w
         self.h = h
         self.enable = enable
+        self.t = Turtle()
         self._wall_init()
 
     def _wall_init(self):
-        self._turtle_init()
+        Utils.turtle_init(self.t)
         self._draw()
 
-    def _turtle_init(self):
-        self.t.hideturtle()
-        self.t.penup()
-        self.t.speed(0)
-
     def _draw(self):
-        self.t.setpos(-self.w / 2, self.h / 2)
-        self.t.pendown()
-        self.t.setpos(-self.w / 2, -self.h / 2)
-        self.t.setpos(self.w / 2, -self.h / 2)
-        self.t.setpos(self.w / 2, self.h / 2)
+        Shape.rect(t=self.t,
+                   x=-self.w / 2,
+                   y=self.h / 2,
+                   w=self.w,
+                   h=self.h,
+                   anchor='tl',
+                   border=True,
+                   bordercolor='#000000',
+                   borderwidth=10,
+                   fill=False)

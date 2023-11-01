@@ -78,7 +78,7 @@ class Button:
         tl_x, tl_y = self._get_tl_axis()
         if (x > tl_x and x < tl_x + self.w and y < tl_y and y > tl_y - self.h):
             self.inter_times += 1
-            if self.inter_times > 25:   # 防止按键状态切换过快
+            if self.inter_times > 20:   # 防止按键状态切换过快
                 return True
             else:
                 return False
