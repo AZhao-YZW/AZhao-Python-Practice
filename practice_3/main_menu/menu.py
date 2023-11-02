@@ -7,12 +7,11 @@ from frame import Utils
 from component import Button, Text, Mouse
 
 
-class _Menu:
+class Menu:
     '''
     game_start: 开始游戏回调函数;
     game_exit: 退出游戏回调函数
     '''
-    _menu = None
     s = Screen()
     motion_event = MotionEvent()
     w = GameWindow()
@@ -46,15 +45,7 @@ class _Menu:
     def _menu_exit(self):
         self._menu_destroy()
         self._game_exit()
-        self._menu = None
 
     def _menu_start(self):
         self._menu_destroy()
         self._game_start()
-        self._menu = None
-
-
-def Menu(game_start, game_exit):
-    if _Menu._menu is None:
-        _Menu._menu = _Menu(game_start, game_exit)
-    return _Menu._menu

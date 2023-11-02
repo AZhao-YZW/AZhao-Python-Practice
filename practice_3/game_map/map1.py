@@ -9,22 +9,18 @@ from frame import Utils
 from component import Button, Text, Mouse
 
 
-class _Map1:
-
-    _map1 = None
+class Map1:
 
     def __init__(self, return_menu):
         self.mouse = Mouse()
-        self.t = Turtle()
         self.s = Screen()
-        self.w = GameWindow()
+        self.window = GameWindow()
         self.motion_event = MotionEvent()
         self.wall = Wall()
         self.food = Food()
         self.snake = Snake()
 
         self._return_menu = return_menu
-        Utils.turtle_init(self.t)
         self._map1_init()
 
     def _map1_init(self):
@@ -38,15 +34,8 @@ class _Map1:
 
     def _map1_destroy(self):
         self.btn_exit.ondestroy()
-        self.w.clear_window()
+        self.window.clear_window()
 
     def _map1_exit(self):
         self._map1_destroy()
         self._return_menu()
-        self._map1 = None
-
-
-def Map1(return_menu):
-    if _Map1._map1 is None:
-        _Map1._map1 = _Map1(return_menu)
-    return _Map1._map1

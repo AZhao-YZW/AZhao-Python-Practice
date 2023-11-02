@@ -25,11 +25,14 @@ python实现贪吃蛇，绘图使用turtle库
     【Python】Python全部异常类型（Error）总结 https://blog.csdn.net/g944468183/article/details/124450119
     Python同名包和模块如何处理 https://blog.csdn.net/UZDW_/article/details/131745636
     Python三元表达式 https://zhuanlan.zhihu.com/p/619565891
+    深入理解 Python 中的函数参数传递机制 https://zhuanlan.zhihu.com/p/641068305
 7. Python值得学习的项目：
     Manim: 3Brown1Blue制作数学动画所使用的库, github链接: https://github.com/3b1b/manim
 8. Python文件头SheBang是为了可移植性，意为Unix/Linux指定解释器路径、Python编码方式。
     参考文章：https://blog.csdn.net/daningliu/article/details/121617391
 9. 清屏仅使用game_window模块提供的clear_window()方法，turtle自带的clearscreen()会对Tkinter全局的状态有影响
+10.本项目不把菜单界面、游戏界面等做成单例，单例不利于界面复用，且一般代表永不销毁，
+    本项目界面可复用，切换界面即销毁。
 '''
 
 from turtle import Turtle

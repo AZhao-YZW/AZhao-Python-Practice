@@ -1,32 +1,29 @@
 from turtle import Turtle
 from frame import Utils
 from base import Shape
+from .status import Status
+
 
 class Wall:
 
     def enable(self):
-        self.enable = True
+        self.status.wall_enable = True
 
     def disable(self):
-        self.enable = False
+        self.status.wall_enable = False
 
-    def __init__(self, w=700, h=700, enable=True):
-        self.w = w
-        self.h = h
-        self.enable = enable
+    def __init__(self):
+        self.status = Status()
         self.t = Turtle()
-        self._wall_init()
-
-    def _wall_init(self):
         Utils.turtle_init(self.t)
         self._draw()
 
     def _draw(self):
         Shape.rect(t=self.t,
-                   x=-self.w / 2,
-                   y=self.h / 2,
-                   w=self.w,
-                   h=self.h,
+                   x=-self.status.wall_width / 2,
+                   y=self.status.wall_height / 2,
+                   w=self.status.wall_width,
+                   h=self.status.wall_height,
                    anchor='tl',
                    border=True,
                    bordercolor='#000000',
