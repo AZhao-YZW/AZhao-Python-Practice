@@ -33,6 +33,7 @@ python实现贪吃蛇，绘图使用turtle库
 9. 清屏仅使用game_window模块提供的clear_window()方法，turtle自带的clearscreen()会对Tkinter全局的状态有影响
 10.本项目不把菜单界面、游戏界面等做成单例，单例不利于界面复用，且一般代表永不销毁，
     本项目界面可复用，切换界面即销毁。
+11. 一个查英文单词缩写的网站 https://www.allacronyms.com/
 '''
 
 from turtle import Turtle

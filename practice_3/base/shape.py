@@ -4,6 +4,25 @@ from turtle import Turtle
 class Shape:
     '''基本形状使用Shape类来画'''
 
+    def line(t:Turtle, x, y, len, orient='horizontal',
+             bordercolor='#000000', borderwidth=1):
+        start = (x, y)
+        if orient in ('horizontal', 'h'):
+            end = (x + len, y)
+        elif orient in ('vertical', 'v'):
+            end = (x, y - len)
+        else:
+            raise ValueError('orient is wrong')
+        
+        t.penup()
+        t.setpos(start)
+        t.pendown()
+        t.color(bordercolor)
+        t.pensize(borderwidth)
+        t.setpos(end)
+        t.penup()
+
+
     def rect(t: Turtle, x, y, w, h, anchor='top-left',
              border=True, bordercolor='#000000', borderwidth=1,
              fill=False, fillcolor='#ffffff'):

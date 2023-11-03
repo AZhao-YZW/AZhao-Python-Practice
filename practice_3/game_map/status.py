@@ -2,12 +2,16 @@ class _Status:
     '''游戏状态管理'''
     _status = None
 
+    CELL_SIDE = 20
+    CELL_ROW_NUM = 35
+    CELL_COLUMN_NUM = 35
+
     score = 0
-    wall_width = 700
-    wall_height = 700
+    wall_width = CELL_SIDE * CELL_COLUMN_NUM
+    wall_height = CELL_SIDE * CELL_ROW_NUM
     wall_enable = True
-    snake_speed = 10    # 每秒移动单位数
-    snake_len = 1
+    snake_speed = 2    # 每秒移动单位数
+    snake_len = 3
 
 
 def Status():
