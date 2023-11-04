@@ -26,6 +26,10 @@ python实现贪吃蛇，绘图使用turtle库
     Python同名包和模块如何处理 https://blog.csdn.net/UZDW_/article/details/131745636
     Python三元表达式 https://zhuanlan.zhihu.com/p/619565891
     深入理解 Python 中的函数参数传递机制 https://zhuanlan.zhihu.com/p/641068305
+    python:二维列表(list)初始化 https://blog.csdn.net/weixin_43216017/article/details/89683873
+    Python中使用 [列表生成式] 创建类属性失败的问题 https://segmentfault.com/q/1010000015627110
+    Python 中从 1 到 N 的数字列表 https://www.delftstack.com/zh/howto/python/python-list-from-1-to-n/
+    Python中List的复制（直接复制、浅拷贝、深拷贝） https://blog.csdn.net/qq_24502469/article/details/104185122
 7. Python值得学习的项目：
     Manim: 3Brown1Blue制作数学动画所使用的库, github链接: https://github.com/3b1b/manim
 8. Python文件头SheBang是为了可移植性，意为Unix/Linux指定解释器路径、Python编码方式。

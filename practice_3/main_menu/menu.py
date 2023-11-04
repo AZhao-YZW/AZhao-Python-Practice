@@ -13,7 +13,6 @@ class Menu:
     game_exit: 退出游戏回调函数
     '''
     s = Screen()
-    motion_event = MotionEvent()
     w = GameWindow()
     mouse = Mouse()
     t = Turtle()

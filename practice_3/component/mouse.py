@@ -9,15 +9,15 @@ class _Mouse:
     _mouse = None
     motion_event = MotionEvent()
     w = GameWindow()
-    mouse = Turtle()
 
     def mouse_destroy(self):
         '''在需要隐藏鼠标时调用'''
         self.motion_event.unbind(self._mouse_move_listener)
         self.mouse.hideturtle()
-        self._mouse = None
+        _Mouse._mouse = None
 
     def __init__(self):
+        self.mouse = Turtle()
         Utils.turtle_init(self.mouse)
         self._mouse_init()
 
