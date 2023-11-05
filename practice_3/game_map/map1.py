@@ -64,9 +64,9 @@ class Map1:
         self.btn_exit.onclick(self._map1_exit)
         self.wall = Wall()
         self._draw_backgroud()
-        self.food = Food()
+        self.food = Food(self.update)
         self.snake = Snake(self.update)
-        # init_cell_list = [(x, y, self.status.BLANK)
+        # init_cell_list = [(x, y, self.status.FOOD)
         #                   for x in range(self.status.CELL_COLUMN_NUM)
         #                   for y in range(self.status.CELL_ROW_NUM)]
         # self.update(init_cell_list)

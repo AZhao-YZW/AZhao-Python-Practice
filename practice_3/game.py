@@ -30,6 +30,7 @@ python实现贪吃蛇，绘图使用turtle库
     Python中使用 [列表生成式] 创建类属性失败的问题 https://segmentfault.com/q/1010000015627110
     Python 中从 1 到 N 的数字列表 https://www.delftstack.com/zh/howto/python/python-list-from-1-to-n/
     Python中List的复制（直接复制、浅拷贝、深拷贝） https://blog.csdn.net/qq_24502469/article/details/104185122
+    在 Python 中搜索字典列表 https://www.delftstack.com/zh/howto/python/python-search-list-of-dictionaries/
 7. Python值得学习的项目：
     Manim: 3Brown1Blue制作数学动画所使用的库, github链接: https://github.com/3b1b/manim
 8. Python文件头SheBang是为了可移植性，意为Unix/Linux指定解释器路径、Python编码方式。
@@ -38,6 +39,7 @@ python实现贪吃蛇，绘图使用turtle库
 10.本项目不把菜单界面、游戏界面等做成单例，单例不利于界面复用，且一般代表永不销毁，
     本项目界面可复用，切换界面即销毁。
 11. 一个查英文单词缩写的网站 https://www.allacronyms.com/
+12. git代码统计 https://segmentfault.com/a/1190000008542123
 '''
 
 from turtle import Turtle

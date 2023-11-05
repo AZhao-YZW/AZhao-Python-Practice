@@ -1,3 +1,6 @@
+from frame import Collision
+
+
 class _Status:
     '''游戏状态管理'''
     _status = None
@@ -17,16 +20,20 @@ class _Status:
     def ondestroy(self):
         _Status._status = None
 
+    def get_collision(self):
+        return self.collision
+
     def __init__(self):
 
         self.map1 = (lambda val, col, row:
                      [[val] * col for _ in range(row)])(self.BLANK,
                                                         self.CELL_COLUMN_NUM,
                                                         self.CELL_ROW_NUM)
+        self.collision = Collision()
         self.score = 0
         self.wall_enable = True
         self.snake_list = []
-        self.snake_speed = 2    # 每秒移动单位数
+        self.snake_speed = 10    # 每秒移动单位数
         self.snake_len = 6
         self.snake_dir = 'r'
         self.snake_head_col = int(self.CELL_COLUMN_NUM / 2)
@@ -36,5 +43,4 @@ class _Status:
 def Status():
     if _Status._status is None:
         _Status._status = _Status()
-        print('#############')
     return _Status._status
