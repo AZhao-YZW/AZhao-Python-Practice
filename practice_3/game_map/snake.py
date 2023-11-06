@@ -32,7 +32,9 @@ class Snake:
 
         self.dir_lock = False
         self.next_next_dir = None
-        self.status.collision.register('map1', 'snake', None)
+        self.status.collision.register(self.status.GROUP_MAP1,
+                                       self.status.NAME_SNAKE,
+                                       None)
         self.keypress_event.bind(self._snake_move_listener)
         self.timer.start()
 
@@ -45,6 +47,12 @@ class Snake:
 
     def _is_collision_self(self, head_col, head_row):
         if self.status.map1[head_row][head_col] == self.status.SNAKE:
+            return True
+        else:
+            return False
+
+    def _is_collision_food(self, head_col, head_row):
+        if self.status.map1[head_row][head_col] == self.status.FOOD:
             return True
         else:
             return False
@@ -89,9 +97,11 @@ class Snake:
         head_row = self.status.snake_head_row - ver
         if self._is_collision_wall(head_col, head_row):
             print('pang wall!!!!!!!!!!!!!!')
+            self.dir_lock = False
             return
         if self._is_collision_self(head_col, head_row):
             print('pang self!!!!!!!!!!!!!!')
+            self.dir_lock = False
             return
 
         self.status.snake_head_col += hor
@@ -103,11 +113,19 @@ class Snake:
         snake_list[len(snake_list) - 1][2] = self.status.BLANK
         # 仅需更新头尾格子
         cell_list = [snake_list[0], snake_list[len(snake_list) - 1]]
-        snake_list.pop()
+
+        if self._is_collision_food(head_col, head_row):
+            print('have food!!!!!!!!!!!!!!')
+            self.status.collision.notify(self.status.GROUP_MAP1,
+                                         self.status.NAME_FOOD)
+        else:
+            snake_list.pop()
+
         self._cell_update(cell_list)
 
         if self.next_next_dir is not None:
             self.status.snake_dir = self.next_next_dir
+            print('########## NONONO')
             self.next_next_dir = None
             self._snake_move()
 

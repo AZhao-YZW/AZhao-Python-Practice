@@ -1,3 +1,4 @@
+from random import randint
 from frame import Collision
 
 
@@ -16,12 +17,25 @@ class _Status:
     SNAKE_COLOR = '#000000'
     WALL_WIDTH = CELL_SIDE * CELL_COLUMN_NUM
     WALL_HEIGHT = CELL_SIDE * CELL_ROW_NUM
+    GROUP_MAP1 = 'map1'
+    NAME_SNAKE = 'snake'
+    NAME_FOOD = 'food'
 
     def ondestroy(self):
         _Status._status = None
 
     def get_collision(self):
         return self.collision
+
+    def refresh_food(self):
+        while True:
+            col = randint(0, self.CELL_COLUMN_NUM - 1)
+            row = randint(0, self.CELL_ROW_NUM - 1)
+            if self.map1[row][col] != self.SNAKE:
+                self.map1[row][col] = self.FOOD
+                self.food_col = col
+                self.food_row = row
+                break
 
     def __init__(self):
 
@@ -36,8 +50,15 @@ class _Status:
         self.snake_speed = 10    # 每秒移动单位数
         self.snake_len = 6
         self.snake_dir = 'r'
+        # 设置蛇位置
         self.snake_head_col = int(self.CELL_COLUMN_NUM / 2)
         self.snake_head_row = int(self.CELL_ROW_NUM / 2)
+        col = self.snake_head_col
+        row = self.snake_head_row
+        for i in range(self.snake_len):
+            self.map1[row][col - i] = self.SNAKE
+        # 设置食物位置
+        self.refresh_food()
 
 
 def Status():

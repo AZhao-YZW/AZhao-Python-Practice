@@ -104,6 +104,7 @@ class Map1:
     def _map1_destroy(self):
         self.snake.ondestroy()
         self.btn_exit.ondestroy()
+        self.status.collision.delete(self.status.GROUP_MAP1)
         self.status.ondestroy()
         self.window.clear_window()
 

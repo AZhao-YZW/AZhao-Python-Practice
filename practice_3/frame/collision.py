@@ -13,8 +13,12 @@ class Collision:
                                    'name': list[list[str, Callable[[None], None]]]]] = []
 
     def register(self, group: str, name: str, callback: Callable[[None], None]):
-        if group not in self.group_list:
+        for g in self.group_list:
+            if g['group'] == group:
+                break
+        else:
             self.group_list.append({'group': group, 'name': []})
+
         for g in self.group_list:
             if g['group'] == group and [name, callback] not in g['name']:
                 g['name'].append([name, callback])
@@ -34,6 +38,6 @@ class Collision:
         '''碰撞由主动碰撞方发起，通知给name对象，使其执行对应函数'''
         for g in self.group_list:
             if g['group'] == group:
-                for n in g['group']:
+                for n in g['name']:
                     if n[0] == name:
                         n[1]()
