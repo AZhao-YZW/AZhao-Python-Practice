@@ -5,6 +5,7 @@ from frame import GameWindow
 from frame import Utils
 from component import Button, Text, Mouse
 from base import Shape
+from frame import Timer
 from .wall import Wall
 from .food import Food
 from .snake import Snake
@@ -43,6 +44,10 @@ class Map1:
                        fill=True,
                        fillcolor=color)
 
+    def _score_inc(self):
+        self.status.score += 1
+        self.text_num.set_text(str(self.status.score))
+
     def __init__(self, return_menu):
         self.mouse = Mouse()
         self.s = Screen()
@@ -56,15 +61,21 @@ class Map1:
 
     def _map1_init(self):
         self.text_title = Text('贪吃蛇',
-                               0, 360, 'center',
+                               0, 360, 140, 50, 'center',
                                ('Arial', 24, 'normal'))
+        self.text_score = Text('分数：',
+                               220, 360, 80, 30, 'center',
+                               ('Arial', 16, 'normal'))
+        self.text_num = Text('0',
+                             280, 360, 40, 30, 'center',
+                             ('Arial', 16, 'normal'))
         self.btn_exit = Button('返回主菜单',
                                -400, 370, 140, 30, 'center',
                                ('Arial', 16, 'normal'))
         self.btn_exit.onclick(self._map1_exit)
         self.wall = Wall()
         self._draw_backgroud()
-        self.food = Food(self.update)
+        self.food = Food(self.update, self._score_inc)
         self.snake = Snake(self.update)
         # init_cell_list = [(x, y, self.status.FOOD)
         #                   for x in range(self.status.CELL_COLUMN_NUM)

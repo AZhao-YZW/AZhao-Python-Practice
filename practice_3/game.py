@@ -47,10 +47,7 @@ from turtle import Screen
 from main_menu import Menu
 from game_map import Map1
 
-# 游戏帧率(Hz)
-FPS = 30
 
-refresh_time = round(1000 / FPS)
 screen = Screen()   # Screen为单例
 
 
@@ -58,9 +55,11 @@ def game_init():
     screen.tracer(5, 0)
     Menu(game_start, game_exit)
 
+
 def return_menu():
     print('return_menu')
     Menu(game_start, game_exit)
+
 
 def game_start():
     print('staaart')

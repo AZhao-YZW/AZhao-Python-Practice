@@ -47,7 +47,7 @@ class _Status:
         self.score = 0
         self.wall_enable = True
         self.snake_list = []
-        self.snake_speed = 10    # 每秒移动单位数
+        self.snake_speed = 5    # 每秒移动单位数
         self.snake_len = 6
         self.snake_dir = 'r'
         # 设置蛇位置

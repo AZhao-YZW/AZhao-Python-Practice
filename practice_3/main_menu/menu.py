@@ -25,7 +25,7 @@ class Menu:
 
     def _menu_init(self):
         self.text_title = Text('贪吃蛇',
-                               0, 200, 'center',
+                               0, 200, 300, 100, 'center',
                                ('Arial', 52, 'normal'))
         self.btn_start = Button('开始游戏',
                                 0, 0, 200, 50, 'center',

@@ -15,12 +15,35 @@ class Snake:
     def __init__(self, cell_update: Callable[[list[list[int, int, int]]], None]):
         self.status = Status()
         self.keypress_event = KeyPressEvent()
+        self.refresh_time = round(1000 / self.status.snake_speed)  # 每格移动时间(ms)
         self.timer = Timer(self._snake_move,
-                           int(1000 / self.status.snake_speed))
+                           int(self.refresh_time))
+        self.M_SPLIT = 5  # 每移动一格检测5次(实测5次能保证速度平稳)
+        self.M_REFRESH_TIME = round(self.refresh_time / self.M_SPLIT)
+        self.monitor_cnt = 0
+        self.monitor = Timer(self._calibrate_timer,
+                             int(self.M_REFRESH_TIME))
         self.t = Turtle()
         Utils.turtle_init(self.t)
         self._cell_update = cell_update
         self._snake_init()
+        self.timer.start()
+        self.monitor.start()
+
+    def _calibrate_timer(self):
+        '''由于_snake_move的执行耗时，实际的snake_speed并不准确，
+        需要另一个校准计时器来校时
+        '''
+        self.monitor_cnt += 1
+        if self.timer.is_run():
+            if self.monitor_cnt > self.M_SPLIT:
+                self.refresh_time -= self.M_REFRESH_TIME / self.M_SPLIT
+                print('-----', self.refresh_time, self.monitor_cnt)
+            elif self.monitor_cnt < self.M_SPLIT:
+                self.refresh_time += self.M_REFRESH_TIME / self.M_SPLIT
+                print('+++++', self.refresh_time, self.monitor_cnt)
+            self.timer.set_interval(round(self.refresh_time))
+            self.monitor_cnt = 0
 
     def _snake_init(self):
         head_col = self.status.snake_head_col
@@ -36,7 +59,6 @@ class Snake:
                                        self.status.NAME_SNAKE,
                                        None)
         self.keypress_event.bind(self._snake_move_listener)
-        self.timer.start()
 
     def _is_collision_wall(self, head_col, head_row):
         if (head_col >= self.status.CELL_COLUMN_NUM or head_col < 0 or
@@ -125,7 +147,6 @@ class Snake:
 
         if self.next_next_dir is not None:
             self.status.snake_dir = self.next_next_dir
-            print('########## NONONO')
             self.next_next_dir = None
             self._snake_move()
 
