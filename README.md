@@ -19,4 +19,7 @@ practice_2.py: turtle（海龟画图）, ipython（交互式命令行）, IDLE�
 Python manim库
 
 ### practice_5
+PikaScript学习
+
+### practice_6
 python实现自动化脚本
