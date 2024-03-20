@@ -22,4 +22,7 @@ Python manim库
 PikaScript学习
 
 ### practice_6
-python实现自动化脚本
+python编写命令行工具
+
+### practice_7
+python编写参数遍历调用命令行工具的工具
