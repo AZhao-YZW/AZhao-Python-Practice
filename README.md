@@ -1,13 +1,13 @@
 ## 目录
 
-### practice_1
-matplotlib_test.py: matplotlib库，用来画图表
-practice_1.py: 练习基础语法，print, for-in, if-else, list
+### 01_matplotlib_learning
+test_1.py: matplotlib库，用来画图表
+test_2.py: 练习基础语法，print, for-in, if-else, list
 
-### practice_2
-practice_2.py: turtle（海龟画图）, ipython（交互式命令行）, IDLE（python原生自带开发环境）
+### 02_turtle_learning
+test_1.py: turtle（海龟画图）, ipython（交互式命令行）, IDLE（python原生自带开发环境）
 
-### practice_3
+### 03_turtle_snake
 `运行入口`: game.py
 `简介`: python实现贪吃蛇，绘图使用turtle库
 `功能`: 游戏首先进入菜单界面，提供设置选项，点击开始游戏进入贪吃蛇游戏
@@ -15,14 +15,12 @@ practice_2.py: turtle（海龟画图）, ipython（交互式命令行）, IDLE�
 `最终完成`: 完成菜单界面与游戏界面，对图形、事件相关的组件进行了封装；
 贪吃蛇游戏完成了碰撞检测、状态管理功能，但遗留了一些性能问题未解决
 
-### practice_4
+### 04_manim_learning
 Python manim库
 
-### practice_5
+### 05_pikapython_learning
 PikaScript学习
 
-### practice_6
-python编写命令行工具
-
-### practice_7
-python编写参数遍历调用命令行工具的工具
+### 06_python_cli
+`file_gen`: python编写批量操作文件的命令行工具
+`scsi_test_util`: python编写参数遍历调用命令行工具的工具
